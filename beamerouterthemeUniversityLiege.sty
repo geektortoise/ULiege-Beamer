@@ -1,0 +1,223 @@
+\RequirePackage{ifthen}
+
+\mode<presentation>
+
+% lengths
+
+% images
+\def \universitylogofile {images/ulg_logo}
+
+
+% headline
+%for adjusting the position of the image in the titles of frames
+%instead of using a custom main theme, configure the inner and outer themes (footline)
+\setbeamertemplate{headline}{
+    	\vspace{0.2cm}
+	\grouplogo
+% ici faire un textwidth -3 et faire un hill avant de faire la ligne histoire qu'elle soit sur la droite
+ 	 \begin{beamercolorbox}[wd=\textwidth,ht=15ex,leftskip=1.4cm,rightskip=0.3cm]{author in head/foot}
+    	\vspace{0.1cm}
+%    	\hrule
+	\hspace{-3.35cm}\rule{\textwidth}{0.4pt}
+
+%    	\vspace{0.1cm}
+\hfill \facultyTitle{\beamer@facultyvalue}{\beamer@languagevalue} \hspace{1.4cm} \newline
+\hspace*{0pt}
+\hfill \facultySubtitle{\beamer@facultyvalue}{\beamer@languagevalue} \hspace{0.5cm}
+  	\end{beamercolorbox}
+  	\vspace*{0.1cm}
+}
+
+% frametitle
+\setbeamertemplate{frametitle}
+{
+  %\vskip-0.25\beamer@headheight n existe pas ici voir le template air pour voir la valeur de cette unite
+  \vskip-\baselineskip
+  \vskip-0.7cm
+  \hskip0.7cm\usebeamerfont*{frametitle}\insertframetitle
+  \vskip-0.10em
+  \usebeamerfont*{framesubtitle}\insertframesubtitle
+}
+
+% footline
+\setbeamertemplate{footline}{
+  	\ublogo
+%ht est le sensé etre la hauteur... leftskip le margin de gauche (pour pas etre sur le logo)
+% rithgt est pour ne pas que le chiffre soit tout collé à droite.                   % ici g pas compris
+ 	 \begin{beamercolorbox}[wd=\textwidth,ht=4ex,leftskip=1.4cm,rightskip=0.3cm]{author in head/foot}
+	\hspace{-0.15cm}\rule{\textwidth}{0.4pt}
+
+    	\vspace{0.1cm}
+   		\insertdate \hspace{1cm} \inserttitle \newline 
+     	\insertshortauthor \ - \insertshortinstitute \hfill 
+	\ifbeamer@framenumber%
+		\insertframenumber%
+		\ifbeamer@totalframenumber%
+			/\inserttotalframenumber%
+		\fi
+	\fi%
+  	\end{beamercolorbox}
+  	\vspace*{0.1cm}
+} 
+
+
+\newcommand{\facultyTitle}[2]{%
+	\ifbeamer@faculty
+		\ifthenelse{\equal{#2}{english}}
+			{\facultyTitleEnglish{#1}}{}%
+		\ifthenelse{\equal{#2}{french}}
+			{\facultyTitleFrench{#1}}{}%
+	\else
+		% put here a generic title
+		\vspace{0.75em}
+	\fi
+}
+
+% put this in a separated tex file utils.tex
+\newcommand{\facultyTitleEnglish}[1]{%
+  \ifthenelse{\equal{#1}{fas}}
+    {Faculty of Applied Sciences}{}%
+  \ifthenelse{\equal{#1}{sci}}
+    {Faculty of Sciences}{}%
+  \ifthenelse{\equal{#1}{med}}
+    {Faculty of Medicine}{}%
+  \ifthenelse{\equal{#1}{psy}}
+    {Faculty of Psychology, Speech and Language Therapy, and Education}{}%
+  \ifthenelse{\equal{#1}{phi}}
+    {Faculty of Philosophy and Letters}{}%
+  \ifthenelse{\equal{#1}{law}}
+    {Faculty of Law, Political Science and Criminology}{}%
+  \ifthenelse{\equal{#1}{soc}}
+    {Institute for Human and Social Sciences}{}%
+  \ifthenelse{\equal{#1}{hec}}
+    {HEC Management School}{}%
+  \ifthenelse{\equal{#1}{agr}}
+    {Gembloux Agro-Bio Tech}{}%
+  \ifthenelse{\equal{#1}{arc}}
+    {Architecture}{}%
+  \ifthenelse{\equal{#1}{vet}}
+    {Faculty of Veterinary Medecine}{}%
+}
+\newcommand{\facultyTitleFrench}[1]{%
+  \ifthenelse{\equal{#1}{fas}}
+    {Faculté des Sciences Appliquées}{}%
+  \ifthenelse{\equal{#1}{sci}}
+    {Faculty of Sciences}{}%
+  \ifthenelse{\equal{#1}{med}}
+    {Faculty of Medicine}{}%
+  \ifthenelse{\equal{#1}{psy}}
+    {Faculty of Psychology, Speech and Language Therapy, and Education}{}%
+  \ifthenelse{\equal{#1}{phi}}
+    {Faculty of Philosophy and Letters}{}%
+  \ifthenelse{\equal{#1}{law}}
+    {Faculty of Law, Political Science and Criminology}{}%
+  \ifthenelse{\equal{#1}{soc}}
+    {Institute for Human and Social Sciences}{}%
+  \ifthenelse{\equal{#1}{hec}}
+    {HEC Management School-ULg}{}%
+  \ifthenelse{\equal{#1}{agr}}
+    {Gembloux Agro-Bio Tech}{}%
+  \ifthenelse{\equal{#1}{arc}}
+    {Architecture}{}%
+  \ifthenelse{\equal{#1}{vet}}
+    {Faculté de Médecine Vétérinaire}{}%
+}
+\newcommand{\facultySubtitle}[2]{%
+	\ifbeamer@faculty
+		\ifthenelse{\equal{#2}{english}}
+			{\facultySubtitleEnglish{#1}}{}%
+		\ifthenelse{\equal{#2}{french}}
+			{\facultySubtitleFrench{#1}}{}%
+	\else
+		% put here a generic subtitle
+		\vspace{1em}
+	\fi
+}
+\newcommand{\facultySubtitleEnglish}[1]{%
+  \ifthenelse{\equal{#1}{fas}}
+    {School of engineering and computer science}{}%
+  \ifthenelse{\equal{#1}{sci}}
+    {\vspace{1em}}{}%
+  \ifthenelse{\equal{#1}{med}}
+    {\vspace{1em}}{}%
+  \ifthenelse{\equal{#1}{psy}}
+    {\vspace{1em}}{}%
+  \ifthenelse{\equal{#1}{phi}}
+    {\vspace{1em}}{}%
+  \ifthenelse{\equal{#1}{law}}
+    {\vspace{1em}}{}%
+  \ifthenelse{\equal{#1}{soc}}
+    {\vspace{1em}}{}%
+  \ifthenelse{\equal{#1}{hec}}
+    {\vspace{1em}}{}%
+  \ifthenelse{\equal{#1}{agr}}
+    {\vspace{1em}}{}%
+  \ifthenelse{\equal{#1}{arc}}
+    {\vspace{1em}}{}%
+  \ifthenelse{\equal{#1}{vet}}
+    {\vspace{1em}}{}%
+}
+\newcommand{\facultySubtitleFrench}[1]{%
+  \ifthenelse{\equal{#1}{fas}}
+    {École d'Ingénieurs et d'Informaticiens}{}%
+  \ifthenelse{\equal{#1}{sci}}
+    {\vspace{1em}}{}%
+  \ifthenelse{\equal{#1}{med}}
+    {\vspace{1em}}{}%
+  \ifthenelse{\equal{#1}{psy}}
+    {\vspace{1em}}{}%
+  \ifthenelse{\equal{#1}{phi}}
+    {\vspace{1em}}{}%
+  \ifthenelse{\equal{#1}{law}}
+    {\vspace{1em}}{}%
+  \ifthenelse{\equal{#1}{soc}}
+    {\vspace{1em}}{}%
+  \ifthenelse{\equal{#1}{hec}}
+    {\vspace{1em}}{}%
+  \ifthenelse{\equal{#1}{agr}}
+    {\vspace{1em}}{}%
+  \ifthenelse{\equal{#1}{arc}}
+    {\vspace{1em}}{}%
+  \ifthenelse{\equal{#1}{vet}}
+    {\vspace{1em}}{}%
+}
+
+
+%Do not count the front slide
+\setcounter{framenumber}{0}
+
+
+%to position the group logo at the right-upper corner of a slide
+\newcommand{\grouplogo}{
+	%TPHorizModule and TPVertModule are the factors with which the horizontal and vertical alignment of the following textblock are calculated
+    \ifnum\c@framenumber=0\else
+  \setlength{\TPHorizModule}{1pt}
+  \setlength{\TPVertModule}{1pt}
+  %  textblock{}{x,y}: pos(x) = x * TPHorizModule, pos(y) = y * TPVertModule
+  \begin{textblock}{1}(310,8)
+   \includegraphics[width=45pt,height=30pt]{\universitylogofile}
+  \end{textblock}
+\fi
+  } 
+  
+  %
+% Includes the university logo at the lower left corner of the slide
+  \newcommand{\ublogo}{
+	%TPHorizModule and TPVertModule are the factors with which the horizontal and vertical alignment of the following textblock are calculated
+    \ifnum\c@framenumber=0\else
+
+  \setlength{\TPHorizModule}{1pt}
+  \setlength{\TPVertModule}{1pt}
+  %  textblock{}{x,y}: pos(x) = x * TPHorizModule, pos(y) = y * TPVertModule
+  \begin{textblock}{1}(8,245)
+   \includegraphics[width=30pt,height=25pt]{\urlogofile}
+  \end{textblock}
+\fi
+  } 
+
+% margins
+
+% background
+
+\mode
+<all>

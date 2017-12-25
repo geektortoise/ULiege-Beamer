@@ -1,0 +1,122 @@
+
+% actual configuration
+\mode<presentation>
+
+\input{colors}
+
+\RequirePackage[absolute,verbose,overlay]{textpos}
+\RequirePackage{ifthen}
+% introduce options
+\newif\ifbeamer@faculty
+\beamer@facultyfalse
+\newcommand\beamer@facultyvalue{}
+\DeclareOptionBeamer{faculty}{\beamer@facultytrue\renewcommand\beamer@facultyvalue{#1}}
+
+%\newif\ifbeamer@usefacultycolors\beamer@usefacultycolorsfalse
+%\DeclareOptionBeamer{usecolors}{\beamer@usefacultycolorstrue}
+
+%\newif\ifbeamer@footline\beamer@footlinefalse
+%\DeclareOptionBeamer{footline}{\beamer@footlinetrue}
+
+\newcommand\beamer@languagevalue{english}
+\DeclareOptionBeamer{language}{\renewcommand\beamer@languagevalue{#1}}
+
+\newif\ifbeamer@framenumber\beamer@framenumberfalse
+\DeclareOptionBeamer{framenumber}{\beamer@framenumbertrue}
+
+\newif\ifbeamer@totalframenumber\beamer@totalframenumberfalse
+\DeclareOptionBeamer{totalframenumber}{\beamer@totalframenumbertrue}
+
+\ProcessOptionsBeamer
+
+
+\let\Tiny=\tiny % Kills two default fontsize beamer warnings
+
+\useoutertheme{UniversityLiege}
+
+
+% inner je pense
+%\setbeamertemplate{title page}{
+% change la page principale !
+%}
+%\setbeamertemplate{title page}[default][colsep=-4bp,rounded=true]
+%\setbeamerfont{block title}{size={}}
+
+%\logo{\includegraphics[height=0.6cm]{images/ulg_logo}}
+
+\setbeamerfont{title}     {size=\huge}
+\setbeamerfont{subtitle}  {size=\Large}
+\setbeamerfont{frametitle}{size=\LARGE}
+
+\setbeamerfont{author}{size=\normalsize}
+
+\setbeamerfont{frame number in head}{size=\scriptsize}
+\setbeamerfont{frame number in foot}{size=\scriptsize}
+
+
+%\setbeamertemplate{blocks}[rounded]
+
+\setbeamercolor{titleBox}{bg=faculty-color,fg=white}
+
+\setbeamertemplate{title page}
+{
+%\setbeamercolor{title}{bg=orange,fg=white}
+\vspace{5ex}
+  \begin{center}
+      \begin{beamercolorbox}[sep=8pt,center,rounded=true]{titleBox}%
+        {\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle
+   \ifx\insertsubtitle\@empty%
+    \else%
+      \vskip2ex%
+      \usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle%
+    \fi%
+ 	}%
+      \end{beamercolorbox}%
+    \ifx\insertauthor\@empty%
+    \else%
+      \vskip2ex%
+      \usebeamerfont{author}\usebeamercolor[fg]{author}\insertauthor%
+    \fi%
+    \ifx\insertinstitution\@empty%
+    \else%
+      \vskip2ex%
+      \usebeamerfont{author}\usebeamercolor[fg]{author}\insertinstitute%
+    \fi%
+
+\vspace{5ex}
+\includegraphics[height=2cm]{images/ulg_logo}
+  \end{center}
+%  \vfill%
+}
+%    \titlegraphic{\includegraphics[height=2cm]{images/ulg_logo}}
+
+
+
+
+%\ifthenelse{ \boolean{beamer@faculty} \AND \boolean{beamer@usefacultycolors} }
+\ifthenelse{ \boolean{beamer@faculty}}
+{
+  \colorlet{faculty-color}  {ULG-\beamer@facultyvalue}
+}
+{
+  \colorlet{faculty-color}  {ULG-default}
+}
+
+
+%the usage of the colors in special elements
+\setbeamercolor{title}{fg=white} % title at the main slide
+
+%TODO, gérer le cas où c'est âs renseigner !
+\setbeamercolor{frametitle}{fg=faculty-color}
+\setbeamercolor{structure}{fg=faculty-color}
+
+% use square bullet points instead of arrows
+\setbeamertemplate{items}[square]
+
+
+% inner ?
+% Disable navigation symbols
+\beamertemplatenavigationsymbolsempty
+
+\mode
+<all>
